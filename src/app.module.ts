@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ReportsModule } from './reports/reports.module';
+import { User } from './users/user.entity';
+import { Report } from './reports/report.entity';
 
 @Module({
   imports: [
@@ -11,7 +13,7 @@ import { ReportsModule } from './reports/reports.module';
       //config for typeorm
       type: 'sqlite', //db type
       database: 'db.sqlite', //db name
-      entities: [], //entities
+      entities: [User, Report], //entities connected
       synchronize: true, // tbd
     }),
     UsersModule,
