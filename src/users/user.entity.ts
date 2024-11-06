@@ -5,6 +5,7 @@ import {
   AfterInsert,
   AfterRemove,
   AfterUpdate,
+  BeforeRemove,
 } from 'typeorm'; // decorators for typeorm
 
 @Entity() // mark this class as an entity
@@ -19,7 +20,7 @@ export class User {
   insertLog() {
     console.log('Created a new user with id:', this.id);
   }
-  @AfterRemove()
+  @BeforeRemove()
   removeLog() {
     console.log('Deleted user with id:', this.id);
   }
