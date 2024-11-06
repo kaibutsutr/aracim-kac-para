@@ -10,6 +10,7 @@ export class UsersService {
   }
   create(email: string, password: string) {
     const user = this.repo.create({ email, password }); // create a user object with given properties
+
     return this.repo.save(user); // save it to db
   }
 }

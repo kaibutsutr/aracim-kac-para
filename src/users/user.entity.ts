@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'; // decorators for typeorm
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  AfterInsert,
+  AfterRemove,
+  AfterUpdate,
+} from 'typeorm'; // decorators for typeorm
 
 @Entity() // mark this class as an entity
 export class User {
@@ -8,4 +15,16 @@ export class User {
   email: string;
   @Column()
   password: string;
+  @AfterInsert()
+  insertLog() {
+    console.log('Created a new user with id:', this.id);
+  }
+  @AfterRemove()
+  removeLog() {
+    console.log('Deleted user with id:', this.id);
+  }
+  @AfterUpdate()
+  updateLog() {
+    console.log('Updated user with id:', this.id);
+  }
 }
