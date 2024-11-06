@@ -14,7 +14,7 @@ import { Report } from './reports/report.entity';
       type: 'sqlite', //db type
       database: 'db.sqlite', //db name
       entities: [User, Report], //entities connected
-      synchronize: true, // tbd
+      synchronize: true, // auto migration, this is for development only. You dont want to do migrations after app is developed!!!
     }),
     UsersModule,
     ReportsModule,
