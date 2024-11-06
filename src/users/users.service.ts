@@ -15,10 +15,10 @@ export class UsersService {
     return this.repo.save(user); // save it to db
   }
   findOne(id: number) {
-    return this.repo.findOne(id);
+    return this.repo.findOneBy({ id });
   }
   find(email: string) {
-    return this.repo.find({ email });
+    return this.repo.find({ where: { email } });
   }
   update() {}
   remove() {}
