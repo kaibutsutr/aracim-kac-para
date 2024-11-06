@@ -6,3 +6,20 @@ Content-Type: application/json
 "email":"abcdsadas@gmail.com",
 "password":"12323232"
 }
+### Get one user with given ID
+GET http://localhost:3000/auth/2 HTTP/1.1
+### Get with query
+GET http://localhost:3000/auth?email=abcdsadas@gmail.com HTTP/1.1
+
+
+
+### Update user
+PATCH http://localhost:3000/auth/2
+Content-Type: application/json
+
+{
+"email":"patch@gmail.com",
+"password":"12323232"
+}
+### Delete user
+DELETE http://localhost:3000/auth/1 HTTP/1.1
