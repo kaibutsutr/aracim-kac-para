@@ -27,7 +27,7 @@ export class UsersController {
   @Post('/signup')
   createUser(@Body() body: createUserDto) {
     // use body decorator to request body object and check if its in createUserDto format, if not throw an error
-    this.userService.create(body.email, body.password);
+    this.authService.signUp(body.email, body.password);
   }
   @UseInterceptors(ClassSerializerInterceptor) // use interceptor on get so server doesnt return password!
   @Get('/:id')
