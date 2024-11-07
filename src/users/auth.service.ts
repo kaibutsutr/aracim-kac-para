@@ -10,8 +10,8 @@ export class AuthService {
   constructor(private usersService: UsersService) {}
   async signUp(email: string, password: string) {
     // check if email is in use
-    const user = await this.usersService.find(email);
-    if (user) {
+    const checkuser = await this.usersService.find(email);
+    if (checkuser.length) {
       throw new BadRequestException('Email already in use!');
     }
     // hash and salt the password
@@ -24,8 +24,8 @@ export class AuthService {
     // join them together
     const result = salt + '.' + hash.toString('hex'); // seperate them with a dot so we know where password starts.
     //Also hash data type is buffer so we need to change it into hexadecimal string again
-    const newuser = await this.usersService.create(email, result); // create a new user with given email and hashed-salted password
-    return newuser;
+    const user = await this.usersService.create(email, result); // create a new user with given email and hashed-salted password
+    return user;
   }
   async signIn(email: string, password: string) {
     const user = await this.usersService.find(email);
