@@ -10,13 +10,13 @@ import {
   NotFoundException,
   UseInterceptors,
   ClassSerializerInterceptor,
+  Session,
 } from '@nestjs/common';
 import { createUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { updateUserDto } from './dtos/update-user.dto';
 import { Auth } from 'typeorm';
 import { AuthService } from './auth.service';
-import { Session } from 'inspector/promises';
 
 @Controller('auth')
 export class UsersController {
@@ -26,19 +26,23 @@ export class UsersController {
   ) {} // dependency injectsion since we need users service here
 
   @Post('/signup')
-  createUser(@Body() body: createUserDto, @Session() session: any) {
+  async createUser(@Body() body: createUserDto, @Session() session: any) {
     // use body decorator to request body object and check if its in createUserDto format, if not throw an error
-    this.authService.signUp(body.email, body.password);
+    const user = await this.authService.signUp(body.email, body.password);
+    session.id = user.id; // write id to cookies
+    return user;
   }
   @Post('/signin')
-  signInUser(@Body() body: createUserDto, @Session() session: any) {
+  async signInUser(@Body() body: createUserDto, @Session() session: any) {
     // use body decorator to request body object and check if its in createUserDto format, if not throw an error
-    this.authService.signIn(body.email, body.password); //
+    const user = await this.authService.signIn(body.email, body.password);
+    session.id = user.id; // update cookies
+    return user; //
   }
   @UseInterceptors(ClassSerializerInterceptor) // use interceptor on get so server doesnt return password!
   @Get('/:id')
   async findUser(@Param('id') id: number) {
-    const user = await this.userService.findOne(id);
+    const user = await this.userService.findOne(id); //123
     if (!user) {
       throw new NotFoundException('User not found'); // instead of plain errors, we throw exceptions in nestJS
     }
