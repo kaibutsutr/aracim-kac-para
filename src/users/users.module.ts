@@ -8,6 +8,6 @@ import { AuthService } from './auth.service';
 @Module({
   imports: [TypeOrmModule.forFeature([User])], // create repo for User entity
   controllers: [UsersController],
-  providers: [UsersService],[AuthService]
+  providers: [UsersService, AuthService],
 })
 export class UsersModule {}
