@@ -44,7 +44,7 @@ export class UsersController {
   @Post('signout')
   signOut(@Session() session: any) {
     session.id = null;
-    return;
+    return console.log('Sign out successful!');
   }
 
   // show the current logged user info

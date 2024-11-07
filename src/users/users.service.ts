@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { InjectRepository } from '@nestjs/typeorm'; // we need this decorator to inject repo
@@ -15,6 +19,9 @@ export class UsersService {
     return this.repo.save(user); // save it to db
   }
   findOne(id: number) {
+    if (id === null) {
+      throw new BadRequestException('No valid id');
+    }
     // bring only one user
     return this.repo.findOneBy({ id });
   }
