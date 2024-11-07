@@ -18,8 +18,8 @@ PATCH http://localhost:3000/auth/5
 Content-Type: application/json
 
 {
-"email":"patch@gmail.com",
-"password":"12323232"
+"email":"patchtest@gmail.com"
+
 }
 ### Delete user
 DELETE http://localhost:3000/auth/4 HTTP/1.1
