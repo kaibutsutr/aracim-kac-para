@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { InjectRepository } from '@nestjs/typeorm'; // we need this decorator to inject repo
@@ -27,7 +27,7 @@ export class UsersService {
     // if we dont do it this way, we wont be able to update if user just wants to update one property
     const user = await this.repo.findOneBy({ id }); //  find the user with given id then check if its not null
     if (!user) {
-      throw new Error('User not found!!!');
+      throw new NotFoundException('User not found!!!');
     }
     Object.assign(user, attrs); // assign the values in attrs to user object
     return this.repo.save(user); // we save here to activate hooks
@@ -35,7 +35,7 @@ export class UsersService {
   async remove(id: number) {
     const user = await this.repo.findOneBy({ id }); //  find the user with given id then check if its not null
     if (!user) {
-      throw new Error('User not found!!!');
+      throw new NotFoundException('User not found!!!'); // instead of error we throw fitting exception
     }
     return this.repo.remove(user);
   }
