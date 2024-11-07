@@ -16,6 +16,7 @@ import { UsersService } from './users.service';
 import { updateUserDto } from './dtos/update-user.dto';
 import { Auth } from 'typeorm';
 import { AuthService } from './auth.service';
+import { Session } from 'inspector/promises';
 
 @Controller('auth')
 export class UsersController {
@@ -25,12 +26,12 @@ export class UsersController {
   ) {} // dependency injectsion since we need users service here
 
   @Post('/signup')
-  createUser(@Body() body: createUserDto) {
+  createUser(@Body() body: createUserDto, @Session() session: any) {
     // use body decorator to request body object and check if its in createUserDto format, if not throw an error
     this.authService.signUp(body.email, body.password);
   }
   @Post('/signin')
-  signInUser(@Body() body: createUserDto) {
+  signInUser(@Body() body: createUserDto, @Session() session: any) {
     // use body decorator to request body object and check if its in createUserDto format, if not throw an error
     this.authService.signIn(body.email, body.password); //
   }
