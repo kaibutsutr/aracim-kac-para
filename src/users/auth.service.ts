@@ -15,7 +15,17 @@ export class AuthService {
       throw new BadRequestException('Email already in use!');
     }
     // hash and salt the password
-    const salt = randomBytes(8).toString('hex');
+
+    //generate salt
+    const salt = randomBytes(8).toString('hex'); // get random 8 bytes of data (16 characters), turn it into hexadecimal string (adsad123232)
+    //generate hash by combining password and salt
+    const hash = (await scrypt(password, salt, 32)) as Buffer; // hash a 32 character string with given values
+    // give ts info that data type is Buffer so its not confused
+    // join them together
+    const result = salt + '.' + hash.toString('hex'); // seperate them with a dot so we know where password starts.
+    //Also hash data type is buffer so we need to change it into hexadecimal string again
+    const newuser = await this.usersService.create(email, result); // create a new user with given email and hashed-salted password
+    return newuser;
   }
   async signIn(email: string, password: string) {
     const user = await this.usersService.find(email);

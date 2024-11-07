@@ -14,10 +14,15 @@ import {
 import { createUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { updateUserDto } from './dtos/update-user.dto';
+import { Auth } from 'typeorm';
+import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class UsersController {
-  constructor(private userService: UsersService) {} // dependency injectsion since we need users service here
+  constructor(
+    private userService: UsersService,
+    private authService: AuthService,
+  ) {} // dependency injectsion since we need users service here
 
   @Post('/signup')
   createUser(@Body() body: createUserDto) {
