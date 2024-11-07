@@ -11,6 +11,7 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
   Session,
+  BadRequestException,
 } from '@nestjs/common';
 import { createUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
@@ -24,7 +25,7 @@ export class UsersController {
     private userService: UsersService,
     private authService: AuthService,
   ) {} // dependency injectsion since we need users service here
-
+  @UseInterceptors(ClassSerializerInterceptor)
   @Post('/signup')
   async createUser(@Body() body: createUserDto, @Session() session: any) {
     // use body decorator to request body object and check if its in createUserDto format, if not throw an error
@@ -32,6 +33,7 @@ export class UsersController {
     session.id = user.id; // write id to cookies
     return user;
   }
+  @UseInterceptors(ClassSerializerInterceptor)
   @Post('/signin')
   async signInUser(@Body() body: createUserDto, @Session() session: any) {
     // use body decorator to request body object and check if its in createUserDto format, if not throw an error
@@ -39,9 +41,19 @@ export class UsersController {
     session.id = user.id; // update cookies
     return user; //
   }
+  @Post('signout')
+  signOut(@Session() session: any) {
+    session.id = null;
+    return;
+  }
+
+  // show the current logged user info
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('/whoisthis')
   async whoisthis(@Session() session: any) {
+    if (session.id === null) {
+      throw new BadRequestException('User not logged in!');
+    }
     const user = await this.userService.findOne(session.id);
     return user;
   }
