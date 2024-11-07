@@ -39,6 +39,12 @@ export class UsersController {
     session.id = user.id; // update cookies
     return user; //
   }
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('/whoisthis')
+  async whoisthis(@Session() session: any) {
+    const user = await this.userService.findOne(session.id);
+    return user;
+  }
   @UseInterceptors(ClassSerializerInterceptor) // use interceptor on get so server doesnt return password!
   @Get('/:id')
   async findUser(@Param('id') id: number) {
