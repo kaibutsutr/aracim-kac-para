@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { createUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
+import { updateUserDto } from './dtos/update-user.dto';
 
 @Controller('auth')
 export class UsersController {
@@ -29,7 +30,8 @@ export class UsersController {
     return this.userService.find(email);
   }
   @Patch('/:id')
-  updateUser(@Body() body: createUserDto, @Param('id') id: number) {
+  updateUser(@Body() body: updateUserDto, @Param('id') id: number) {
+    // we use updateuserdto here to make filling data optional. User doesnt have to fill every part of data
     return this.userService.update(id, body);
   }
   @Delete('/:id')
