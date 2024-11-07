@@ -8,6 +8,8 @@ import {
   Delete,
   Query,
   NotFoundException,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { createUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
@@ -22,6 +24,7 @@ export class UsersController {
     // use body decorator to request body object and check if its in createUserDto format, if not throw an error
     this.userService.create(body.email, body.password);
   }
+  @UseInterceptors(ClassSerializerInterceptor) // use interceptor on get so server doesnt return password!
   @Get('/:id')
   async findUser(@Param('id') id: number) {
     const user = await this.userService.findOne(id);
@@ -30,6 +33,7 @@ export class UsersController {
     }
     return user;
   }
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('/')
   async findUsers(@Query('email') email: string) {
     const users = await this.userService.find(email);
@@ -38,6 +42,7 @@ export class UsersController {
     }
     return users;
   }
+  @UseInterceptors(ClassSerializerInterceptor)
   @Patch('/:id')
   updateUser(@Body() body: updateUserDto, @Param('id') id: number) {
     // we use updateuserdto here to make filling data optional. User doesnt have to fill every part of data

@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   Entity,
   Column,
@@ -15,6 +16,7 @@ export class User {
   @Column() // other columns for user
   email: string;
   @Column()
+  @Exclude() // exclude this info with interceptor
   password: string;
   @AfterInsert()
   insertLog() {
