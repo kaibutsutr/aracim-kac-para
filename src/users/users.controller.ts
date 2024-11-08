@@ -12,6 +12,7 @@ import {
   ClassSerializerInterceptor,
   Session,
   BadRequestException,
+  UseGuards,
 } from '@nestjs/common';
 import { createUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
@@ -21,6 +22,7 @@ import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './user.entity';
 import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller('auth')
 export class UsersController {
@@ -53,6 +55,7 @@ export class UsersController {
   // show the current logged user info
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('/whoisthis')
+  @UseGuards(AuthGuard) // only logged user can access here
   async whoisthis(@CurrentUser() user: User) {
     return user;
   }
