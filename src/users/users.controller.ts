@@ -19,6 +19,7 @@ import { updateUserDto } from './dtos/update-user.dto';
 import { Auth } from 'typeorm';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
+import { User } from './user.entity';
 
 @Controller('auth')
 export class UsersController {

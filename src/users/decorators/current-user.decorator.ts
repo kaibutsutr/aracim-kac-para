@@ -9,6 +9,8 @@ export const CurrentUser = createParamDecorator(
     //data:never means decorator doesnt take any arguments
     const request = context.switchToHttp().getRequest(); // convert context to http object and get the request
     // thanks to our custom interceptor our request object has a currentUser info. So we can grab id from it
+    console.log(request.session.currentUser);
+
     return request.session.currentUser;
   },
 );
