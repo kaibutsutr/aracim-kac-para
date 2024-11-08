@@ -20,6 +20,7 @@ import { Auth } from 'typeorm';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './user.entity';
+import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
 
 @Controller('auth')
 export class UsersController {
@@ -52,7 +53,7 @@ export class UsersController {
   // show the current logged user info
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('/whoisthis')
-  async whoisthis(@CurrentUser() user: string) {
+  async whoisthis(@CurrentUser() user: User) {
     return user;
   }
   @UseInterceptors(ClassSerializerInterceptor) // use interceptor on get so server doesnt return password!
