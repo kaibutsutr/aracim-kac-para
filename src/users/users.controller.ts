@@ -18,6 +18,7 @@ import { UsersService } from './users.service';
 import { updateUserDto } from './dtos/update-user.dto';
 import { Auth } from 'typeorm';
 import { AuthService } from './auth.service';
+import { CurrentUser } from './decorators/current-user.decorator';
 
 @Controller('auth')
 export class UsersController {
@@ -50,11 +51,7 @@ export class UsersController {
   // show the current logged user info
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('/whoisthis')
-  async whoisthis(@Session() session: any) {
-    if (session.id === null) {
-      throw new BadRequestException('User not logged in!');
-    }
-    const user = await this.userService.findOne(session.id);
+  async whoisthis(@CurrentUser() user: string) {
     return user;
   }
   @UseInterceptors(ClassSerializerInterceptor) // use interceptor on get so server doesnt return password!

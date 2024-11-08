@@ -5,6 +5,7 @@ export const CurrentUser = createParamDecorator(
   (data: never, context: ExecutionContext) => {
     // accept any kind of data, context is same as Request but more general, not just http requests.
     //data:never means decorator doesnt take any arguments
-    const request = context.switchToHttp().getRequest; // convert context to http object and get the request
+    const request = context.switchToHttp().getRequest(); // convert context to http object and get the request
+    console.log(request.session.userId());
   },
 );
