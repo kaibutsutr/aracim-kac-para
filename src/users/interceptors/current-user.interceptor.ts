@@ -5,6 +5,7 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import { UsersService } from '../users.service';
+import { Session } from 'inspector/promises';
 
 @Injectable()
 export class CurrentUserInterceptor implements NestInterceptor {

@@ -1,4 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import { Session } from 'inspector/promises';
 
 export const CurrentUser = createParamDecorator(
   //create a param decorator with custom values
