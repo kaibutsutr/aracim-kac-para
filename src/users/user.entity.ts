@@ -32,6 +32,6 @@ export class User {
   updateLog() {
     console.log('Updated user with id:', this.id);
   }
-  @OneToMany()
+  @OneToMany(() => Report, (report) => report.user) // you need to memorize this syntax, get this class and get the object from class
   reports: Report[];
 }

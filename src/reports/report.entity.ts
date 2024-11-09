@@ -22,6 +22,6 @@ export class Report {
 
   @Column()
   price: number;
-  @ManyToOne()
+  @ManyToOne(() => User, (user) => user.reports) // need to memorize the syntax to make one to many relationship
   user: User;
 }
