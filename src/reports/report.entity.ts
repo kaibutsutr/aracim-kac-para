@@ -16,6 +16,8 @@ export class Report {
   @Column()
   lineage: number;
   @Column()
+  longitude: number;
+  @Column()
   latitude: number;
   @Column()
   mileage: number;
