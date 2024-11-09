@@ -6,7 +6,7 @@ import {
   IsLongitude,
   IsLatitude,
 } from 'class-validator';
-export class createReportDto {
+export class CreateReportDto {
   @IsNumber()
   @Min(0)
   @Max(100000000)
