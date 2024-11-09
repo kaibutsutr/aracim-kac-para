@@ -19,4 +19,8 @@ export class ReportsService {
     }
     return this.repo.findOneBy({ id });
   }
+  find(year: number) {
+    // bring many users with this year
+    return this.repo.find({ where: { year } });
+  }
 }

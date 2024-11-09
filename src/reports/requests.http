@@ -12,3 +12,5 @@ Content-Type: application/json
 "mileage": 50000,
 "price": 100
 }
+### Get one report
+GET http://localhost:3000/reports/2 HTTP/1.1

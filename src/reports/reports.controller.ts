@@ -1,4 +1,13 @@
-import { Body, Controller, Param, Post, UseGuards, Get } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Param,
+  Post,
+  UseGuards,
+  Get,
+  BadRequestException,
+  Query,
+} from '@nestjs/common';
 import { ReportsService } from './reports.service';
 import { createReportDto } from './dtos/create-report.dto';
 import { AuthGuard } from 'src/guards/auth.guard';
@@ -15,6 +24,17 @@ export class ReportsController {
   @Get('/:id')
   async getReport(@Param('id') id: number) {
     const report = await this.reportsService.findOne(id);
+    if (!report) {
+      throw new BadRequestException('Cant find the report!!1');
+    }
     return report;
+  }
+  @Get('/')
+  async getReports(@Query('year') year: number) {
+    const reports = await this.reportsService.find(year);
+    if (!reports) {
+      throw new BadRequestException('Cant find the report!!1');
+    }
+    return reports;
   }
 }
