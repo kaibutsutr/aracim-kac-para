@@ -13,8 +13,7 @@ export class Report {
   model: string;
   @Column()
   year: number;
-  @Column()
-  lineage: number;
+
   @Column()
   longitude: number;
   @Column()
