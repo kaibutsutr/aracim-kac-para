@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Report } from './report.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -12,5 +12,11 @@ export class ReportsService {
     // get entire body as reportdto format then save it
     const report = this.repo.create(reportdto);
     return this.repo.save(report);
+  }
+  findOne(id: number) {
+    if (id === null) {
+      throw new BadRequestException('Cant find the report with given ID!!!');
+    }
+    return this.repo.findOneBy({ id });
   }
 }
