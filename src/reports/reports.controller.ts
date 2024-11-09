@@ -7,6 +7,7 @@ import {
   Get,
   BadRequestException,
   Query,
+  Delete,
 } from '@nestjs/common';
 import { ReportsService } from './reports.service';
 import { createReportDto } from './dtos/create-report.dto';
@@ -36,5 +37,10 @@ export class ReportsController {
       throw new BadRequestException('Cant find the report!!1');
     }
     return reports;
+  }
+  @UseGuards(AuthGuard)
+  @Delete('/:id')
+  deleteReport(@Param('id') id: number) {
+    return this.reportsService.remove(id);
   }
 }

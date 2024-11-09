@@ -7,7 +7,9 @@ import {
   AfterRemove,
   AfterUpdate,
   BeforeRemove,
+  OneToMany,
 } from 'typeorm'; // decorators for typeorm
+import { Report } from 'src/reports/report.entity';
 
 @Entity() // mark this class as an entity
 export class User {
@@ -30,4 +32,6 @@ export class User {
   updateLog() {
     console.log('Updated user with id:', this.id);
   }
+  @OneToMany()
+  reports: Report[];
 }

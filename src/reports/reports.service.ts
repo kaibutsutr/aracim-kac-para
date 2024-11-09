@@ -23,4 +23,13 @@ export class ReportsService {
     // bring many users with this year
     return this.repo.find({ where: { year } });
   }
+  async remove(id: number) {
+    const report = await this.repo.findOneBy({ id });
+    if (!report) {
+      throw new BadRequestException('Cant find the report with given ID!!!');
+    }
+    console.log('report deleted');
+
+    return this.repo.remove(report);
+  }
 }
