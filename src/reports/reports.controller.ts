@@ -27,8 +27,7 @@ export class ReportsController {
   @Post()
   async createReport(@Body() body: createReportDto, @CurrentUser() user: User) {
     // get current user so we can write the id on reports
-    const userId = user.id;
-    const report = await this.reportsService.create(body, userId);
+    const report = await this.reportsService.create(body, user);
     return report;
   }
   @UseInterceptors(ClassSerializerInterceptor)

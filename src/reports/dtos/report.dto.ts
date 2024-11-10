@@ -13,7 +13,7 @@ export class reportDto {
   longitude: number;
   @Expose()
   mileage: number;
-  @Transform(({ obj }) => obj.user.userId) // transform the report objects user.id part here as userid
+  @Transform(({ obj }) => obj.user.id) // transform the report objects user.id part here as userid
   @Expose()
   userId: number;
 }
