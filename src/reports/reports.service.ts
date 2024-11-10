@@ -13,6 +13,7 @@ export class ReportsService {
   create(reportdto: createReportDto, user: User) {
     // get entire body as reportdto format then save it
     const report = this.repo.create(reportdto);
+    report.user = user; // assign the user who wrote the report!!!
     return this.repo.save(report);
   }
   findOne(id: number) {

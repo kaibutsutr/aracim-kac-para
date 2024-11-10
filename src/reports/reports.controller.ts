@@ -20,8 +20,9 @@ export class ReportsController {
   constructor(private reportsService: ReportsService) {}
   @UseGuards(AuthGuard)
   @Post()
-  async createReport(@Body() body: createReportDto) {
-    const report = await this.reportsService.create(body);
+  async createReport(@Body() body: createReportDto, @CurrentUser() user: User) {
+    // get current user so we can write the id on reports
+    const report = await this.reportsService.create(body, user);
     return report;
   }
   @Get('/:id')
