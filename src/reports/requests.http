@@ -5,7 +5,7 @@ Content-Type: application/json
 {
 "make": "ford",
 "model": "impreza",
-"year": 2005,
+"year": 2009,
 
 "longitude": 0,
 "latitude": 0,
@@ -13,7 +13,7 @@ Content-Type: application/json
 "price": 100
 }
 ### Get one report
-GET http://localhost:3000/reports/1 HTTP/1.1
+GET http://localhost:3000/reports/5 HTTP/1.1
 
 ###Query reports by year
 
