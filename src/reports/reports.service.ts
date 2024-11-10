@@ -48,6 +48,7 @@ export class ReportsService {
     return this.repo.save(report); // we save here to activate hooks
   }
   //get estimate
+  //here
   createEstimate({
     make,
     model,
@@ -62,8 +63,8 @@ export class ReportsService {
       .select('AVG(price)', 'price') //take average of prices
       .where('make = :make', { make }) // list same make
       .andWhere('model = :model', { model }) // and same model, dont use where again since it overrides
-      .andWhere('lng - :lng BETWEEN -5 AND 5', { longitude }) // +-5 difference is ok, we do substraction
-      .andWhere('lat - :lat BETWEEN -5 AND 5', { latitude }) // +-5 difference is ok, we do substraction
+      .andWhere('longitude - :longitude BETWEEN -5 AND 5', { longitude }) // +-5 difference is ok, we do substraction
+      .andWhere('latitude - :latitude BETWEEN -5 AND 5', { latitude }) // +-5 difference is ok, we do substraction
       .andWhere('year - :year BETWEEN -3 AND 3', { year }) // +-3 difference is ok, we do substraction
       .andWhere('approved IS TRUE') // it needs to be approved
       .orderBy('ABS(mileage - :mileage)', 'DESC') // absolute value in case of negative, sort from max to mind

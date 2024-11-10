@@ -48,7 +48,7 @@ export class ReportsController {
   @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   async getEstimate(@Query() query: getEstimateDto) {
-    createEstimate(query);
+    return this.reportsService.createEstimate(query); // call the function
   }
   //get estimate
 
