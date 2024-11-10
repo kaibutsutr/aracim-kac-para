@@ -16,10 +16,13 @@ import { CurrentUser } from 'src/users/decorators/current-user.decorator';
 import { User } from 'src/users/user.entity';
 import { serialize, Serializer } from 'v8';
 import { reportDto } from './dtos/report.dto';
+import { UseInterceptors } from '@nestjs/common';
+import { ClassSerializerInterceptor } from '@nestjs/common';
 
 @Controller('reports')
 export class ReportsController {
   constructor(private reportsService: ReportsService) {}
+  @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard)
   @Post()
   async createReport(@Body() body: createReportDto, @CurrentUser() user: User) {
