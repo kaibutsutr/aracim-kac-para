@@ -30,6 +30,7 @@ export class ReportsController {
     const report = await this.reportsService.create(body, user);
     return report;
   }
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('/:id')
   async getReport(@Param('id') id: number) {
     const report = await this.reportsService.findOne(id);
@@ -38,6 +39,7 @@ export class ReportsController {
     }
     return report;
   }
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('/')
   async getReports(@Query('year') year: number) {
     const reports = await this.reportsService.find(year);
