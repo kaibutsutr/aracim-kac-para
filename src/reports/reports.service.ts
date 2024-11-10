@@ -35,4 +35,12 @@ export class ReportsService {
 
     return this.repo.remove(report);
   }
+  update(id: number) {
+    const report = await this.repo.findOneBy({ id }); //  find the report with given id then check if its not null
+    if (!report) {
+      throw new NotFoundException('Report not found!!!');
+    }
+
+    return this.repo.save(user); // we save here to activate hooks
+  }
 }

@@ -8,6 +8,7 @@ import {
   BadRequestException,
   Query,
   Delete,
+  Patch,
 } from '@nestjs/common';
 import { ReportsService } from './reports.service';
 import { createReportDto } from './dtos/create-report.dto';
@@ -18,6 +19,7 @@ import { serialize, Serializer } from 'v8';
 import { reportDto } from './dtos/report.dto';
 import { UseInterceptors } from '@nestjs/common';
 import { ClassSerializerInterceptor } from '@nestjs/common';
+import { approveReportDto } from './dtos/approve-report.dto';
 
 @Controller('reports')
 export class ReportsController {
@@ -55,7 +57,7 @@ export class ReportsController {
   }
   //approve reports
   @Patch('/:id')
-  updateUser(@Body() body: updateReportDto, @Param('id') id: number) {
-    return this.reportsService.update(id, body);
+  approveReport(@Body() body: approveReportDto, @Param('id') id: number) {
+    return this.reportsService.update(id); // we need id only
   }
 }
