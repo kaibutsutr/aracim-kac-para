@@ -20,6 +20,7 @@ import { reportDto } from './dtos/report.dto';
 import { UseInterceptors } from '@nestjs/common';
 import { ClassSerializerInterceptor } from '@nestjs/common';
 import { approveReportDto } from './dtos/approve-report.dto';
+import { AdminGuard } from 'src/guards/admin.guard';
 
 @Controller('reports')
 export class ReportsController {
@@ -57,6 +58,7 @@ export class ReportsController {
   }
   //approve reports
   @Patch('/:id')
+  @UseGuards(AdminGuard)
   approveReport(@Body() body: approveReportDto, @Param('id') id: number) {
     return this.reportsService.update(id); // we need id only
   }

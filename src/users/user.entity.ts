@@ -15,6 +15,8 @@ import { Report } from 'src/reports/report.entity';
 export class User {
   @PrimaryGeneratedColumn()
   id: number; // id column for db
+  @Column({ default: true })
+  admin: boolean; // check if its admin
   @Column() // other columns for user
   email: string;
   @Column()

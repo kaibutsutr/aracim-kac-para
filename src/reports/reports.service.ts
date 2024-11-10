@@ -42,6 +42,8 @@ export class ReportsService {
       throw new NotFoundException('Report not found!!!');
     }
     report.approved = true; // approve report
+    console.log('Report approved by Admin!');
+
     return this.repo.save(report); // we save here to activate hooks
   }
 }
