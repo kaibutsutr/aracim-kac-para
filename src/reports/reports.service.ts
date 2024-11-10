@@ -10,10 +10,10 @@ import { User } from 'src/users/user.entity';
 export class ReportsService {
   constructor(@InjectRepository(Report) private repo: Repository<Report>) {}
 
-  create(reportdto: createReportDto, user: User) {
+  create(reportdto: createReportDto, userId: number) {
     // get entire body as reportdto format then save it
     const report = this.repo.create(reportdto);
-    report.user = user; // assign the user who wrote the report!!!
+    report.user.id = userId; // assign the user who wrote the report!!!
     return this.repo.save(report);
   }
   findOne(id: number) {
