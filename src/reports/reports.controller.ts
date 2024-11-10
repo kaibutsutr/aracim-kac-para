@@ -21,6 +21,8 @@ import { UseInterceptors } from '@nestjs/common';
 import { ClassSerializerInterceptor } from '@nestjs/common';
 import { approveReportDto } from './dtos/approve-report.dto';
 import { AdminGuard } from 'src/guards/admin.guard';
+import { query } from 'express';
+import { getEstimateDto } from './dtos/get-estimate.dto';
 
 @Controller('reports')
 export class ReportsController {
@@ -42,15 +44,14 @@ export class ReportsController {
     }
     return report;
   }
+  //get estimate
   @UseInterceptors(ClassSerializerInterceptor)
-  @Get('/')
-  async getReports(@Query('year') year: number) {
-    const reports = await this.reportsService.find(year);
-    if (!reports) {
-      throw new BadRequestException('Cant find the report!!1');
-    }
-    return reports;
+  @Get()
+  async getEstimate(@Query() query: getEstimateDto) {
+    createEstimate(query);
   }
+  //get estimate
+
   @UseGuards(AuthGuard)
   @Delete('/:id')
   deleteReport(@Param('id') id: number) {

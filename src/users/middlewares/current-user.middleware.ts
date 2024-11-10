@@ -5,6 +5,7 @@ import { UsersService } from '../users.service';
 import { User } from '../user.entity';
 
 declare global {
+  // change the Request interface by adding a new property so we can use this property in Request body
   namespace Express {
     interface Request {
       currentUser?: User;

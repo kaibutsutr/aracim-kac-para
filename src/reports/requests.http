@@ -15,14 +15,14 @@ Content-Type: application/json
 ### Get one report
 GET http://localhost:3000/reports/9 HTTP/1.1
 
-###Query reports by year
+###Get estimate price
 
-GET http://localhost:3000/reports/ HTTP/1.1
+GET http://localhost:3000/reports?make=ford&model=good&year=2020&longitude=55.88&latitude=66.6&mileage=550 HTTP/1.1
 
 ###Delete report
 DELETE http://localhost:3000/reports/4 HTTP/1.1
 ###Approve report
-PATCH http://localhost:3000/reports/9 HTTP/1.1
+PATCH http://localhost:3000/reports/10 HTTP/1.1
 Content-Type: application/json
 
 {

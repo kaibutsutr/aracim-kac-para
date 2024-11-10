@@ -7,6 +7,6 @@ export class AdminGuard implements CanActivate {
   canActivate(context: ExecutionContext) {
     // same as Request object
     const request = context.switchToHttp().getRequest(); // get request object
-    return true;
+    return request.session.id;
   }
 }
