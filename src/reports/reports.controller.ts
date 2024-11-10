@@ -14,6 +14,8 @@ import { createReportDto } from './dtos/create-report.dto';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { CurrentUser } from 'src/users/decorators/current-user.decorator';
 import { User } from 'src/users/user.entity';
+import { serialize, Serializer } from 'v8';
+import { reportDto } from './dtos/report.dto';
 
 @Controller('reports')
 export class ReportsController {
