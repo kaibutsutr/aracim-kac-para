@@ -53,4 +53,9 @@ export class ReportsController {
   deleteReport(@Param('id') id: number) {
     return this.reportsService.remove(id);
   }
+  //approve reports
+  @Patch('/:id')
+  updateUser(@Body() body: updateReportDto, @Param('id') id: number) {
+    return this.reportsService.update(id, body);
+  }
 }
